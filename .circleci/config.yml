@@ -1,0 +1,47 @@
+version: 2.1
+jobs:
+  cxflow:
+    docker:
+      - image: checkmarx/cx-flow:$CX_FLOW_VERSION
+    steps:
+      - checkout
+      - run:
+          name: "Run CxFlow"
+          command: | 
+            java -jar /app/cx-flow.jar \
+            --scan \
+            --f=. \
+            --namespace=$CIRCLE_PROJECT_USERNAME \
+            --app=$CIRCLE_PROJECT_REPONAME \
+            --cx-project=$CIRCLE_PROJECT_REPONAME \
+            --repo-name=$CIRCLE_PROJECT_REPONAME \
+            --branch=$CIRCLE_BRANCH \
+            --repo-url=$CIRCLE_REPOSITORY_URL \
+            --cx-flow.bug-tracker=$CX_BUG_TRACKER \
+            --cx-flow.bug-tracker-impl=$CX_BUG_TRACKER \
+            --cx-flow.filter-severity=High \
+            --cx-flow.filter-severity=Medium \
+            --cx-flow.filter-state=Confirmed \
+            --cx-flow.filter-state=Urgent \
+            --cx-flow.enabled-vulnerability-scanners=sast \
+            --cx-flow.break-build=true \
+            --cx-flow.thresholds.high=$CX_HIGH \
+            --cx-flow.thresholds.medium=$CX_MEDIUM \
+            --checkmarx.username=$CX_USER \
+            --checkmarx.password=$CX_PASSWORD \
+            --checkmarx.base-url=$CX_SERVER \
+            --checkmarx.team=$CX_TEAM \
+            --checkmarx.scan-preset=$CX_PRESET \
+            --checkmarx.configuration=$CX_CONFIGURATION \
+            --checkmarx.version=9.4 \
+            --checkmarx.multi-tenant=false \
+            --github.url=https://github.com \
+            --github.api-url=https://api.github.com/repos/ \
+            --github.token=$GH_TOKEN \
+            --github.block-merge=true \
+            --github.error-merge=true
+workflows:
+  cxflow-workflow:
+    jobs:
+      - cxflow:
+          context: Cx
