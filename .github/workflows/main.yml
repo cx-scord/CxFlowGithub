@@ -16,14 +16,14 @@ jobs:
     - name: Checkmarx CxFlow Action
       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.3
       with:
-        project: CxFlowGithub-Sainsbury
+        project: CxFlowGithub
         team: CxServer
         checkmarx_url: ${{ secrets.CX_SERVER }}        
         checkmarx_username: ${{secrets.CX_USER}}
         checkmarx_password: ${{secrets.CX_PASSWD}}
         checkmarx_client_secret: ${{secrets.CX_CLIENT_SECRET}}        
         preset: 'High and Medium'
-        app: CxFlowGithub-Sainsbury
+        app: CxFlowGithub
         # Break build based on Checkmarx findings?
         break_build: true
         incremental: false
