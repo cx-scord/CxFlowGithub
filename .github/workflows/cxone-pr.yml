@@ -22,7 +22,7 @@ jobs:
           base_uri: ${{ secrets.CX_BASE_URI }}
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          additional_params: --scan-types "sca"
-                             --sca-resolver "/github/workspace/ScaResolver"
+          additional_params: --scan-types sca
+                             --sca-resolver /github/workspace/ScaResolver
                              --sca-resolver-params "--log-level Debug"
                              --debug 
