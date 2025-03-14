@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      # Runs a single command using the runners shell
+      - name: Set SCA Resolver Environment
+        run: "wget https://sca-downloads.s3.amazonaws.com/cli/latest/ScaResolver-linux64.tar.gz && tar -xzvf ScaResolver-linux64.tar.gz && rm -rf ScaResolver-linux64.tar.gz && chmod +x ./ScaResolver && ls -la && ./ScaResolver -h"
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main #Github Action version
         with:
@@ -20,4 +23,7 @@ jobs:
           base_auth_uri: ${{ secrets.CX_BASE_AUTH_URI }}
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          additional_params: --debug
+          additional_params: --scan-types "sca"
+                             --sca-resolver $(pwd)/ScaResolver
+                             --sca-resolver-params "--log-level Debug"
+                             --debug 
