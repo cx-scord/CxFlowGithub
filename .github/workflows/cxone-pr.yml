@@ -23,6 +23,6 @@ jobs:
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           additional_params: --scan-types sca
-                             --sca-resolver './ScaResolver'
+                             --sca-resolver '\./ScaResolver'
                              --sca-resolver-params "--log-level Debug"
                              --debug 
