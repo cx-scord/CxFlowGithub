@@ -17,6 +17,7 @@ jobs:
           project_name: CxFlowGithub
           cx_tenant: ${{ secrets.CX_TENANT }}
           base_uri: ${{ secrets.CX_BASE_URI }}
+          base_auth_uri: ${{ secrets.CX_BASE_AUTH_URI }}
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           additional_params: --debug
